@@ -27,4 +27,7 @@ const Input = {
 
 
 }
-export { Timer, Input };
+const Camera = {
+    main:undefined,
+} ;
+export { Timer, Input ,Camera};

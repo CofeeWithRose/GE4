@@ -1,19 +1,21 @@
 
 import { AbstractInstance } from './../Core/AbstractInstance';
-import { config } from './../GE-config';
+import { config } from './../Config/config-core';
 class AbstractComponent extends AbstractInstance {
     constructor() {
         super();
         // this._initComp();
     }
+    //To Fix?
     loadComp(gameObj){
         this.gameObject = gameObj;
     }
     getComponentsByType(){
-        this.gameObject.getComponentById
+        const comps = this.gameObject.getComponentsByType();
+        return comps?  comps[0]:null;
     }
     getComponentById(){
-
+        return this.gameObject.getComponentById();
     }
     // _initComp(){
     //     const keys = Object.keys(config);

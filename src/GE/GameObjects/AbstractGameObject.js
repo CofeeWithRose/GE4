@@ -17,6 +17,7 @@ class AbstractGameObject extends AbstractInstance {
                 this._typeComponents.set(component.constructor, list);
             }
             list.push(component);
+            component.loadComp(this);
             return component;
         }
     };

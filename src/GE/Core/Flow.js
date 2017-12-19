@@ -18,8 +18,8 @@ class Flow {
 		this._taskMap = new Map();
 		this._initTaskLists(this._taskLists);
 	};
-	_initTaskLists(taskLists){
-		for(let i = 0; i<this._configList.length;i++){
+	_initTaskLists(taskLists) {
+		for (let i = 0; i < this._configList.length; i++) {
 			taskLists[i] = [];
 		}
 	};
@@ -104,7 +104,7 @@ class Flow {
 		if (!taskLists) {
 			taskLists = [];
 			this._initTaskLists(taskLists);
-			objTasks.set(Constant.TASK_LISTS,taskLists);
+			objTasks.set(Constant.TASK_LISTS, taskLists);
 		}
 		this._addToTaskLists(taskLists, taskPosition.task, taskPosition.prioroty);
 		compTask.push(taskPosition);
