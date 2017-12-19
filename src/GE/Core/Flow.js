@@ -16,9 +16,13 @@ class Flow {
 		* 
 		*/
 		this._taskMap = new Map();
-
+		this._initTaskLists(this._taskLists);
 	};
-
+	_initTaskLists(taskLists){
+		for(let i = 0; i<this._configList.length;i++){
+			taskLists[i] = [];
+		}
+	};
 	//按顺序执行taskt,出现异常打日志，不中断后续任务的执行.
 	runTask() {
 		this._runTask(this._taskLists);
@@ -35,9 +39,10 @@ class Flow {
 				}
 			}
 		}
-	}
+	};
+
 	_addToTaskLists(taskLists, task, prioroty) {
-		const curentList = taskLists[prioroty] = taskLists[prioroty] || [];
+		const curentList = taskLists[prioroty];
 		const index = curentList.push(task) - 1;
 		return { task, prioroty };
 	}
@@ -98,6 +103,7 @@ class Flow {
 		}
 		if (!taskLists) {
 			taskLists = [];
+			this._initTaskLists(taskLists);
 			objTasks.set(Constant.TASK_LISTS,taskLists);
 		}
 		this._addToTaskLists(taskLists, taskPosition.task, taskPosition.prioroty);

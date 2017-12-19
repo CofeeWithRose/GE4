@@ -13,7 +13,14 @@ class GE {
         console.log("_init ...");
         this._update = this._update.bind(this);
         this.start = this.start.bind(this);
-
+        this._initService();
+    };
+    _initService() {
+        const services = taskConfig.services;
+        const serviceObject = Symbol();
+        for (let i = -1; services[++i];) {
+           this.addComponent(serviceObject,new services[i]);
+        }
     };
 
     _updateTemp() {
@@ -50,6 +57,7 @@ class GE {
         this._endFlow.runTask();
     }
     addComponent(gameObject, compment) {
+        // debugger
         this._startFlow.addCompTask(gameObject, compment);
         this._updateFlow.addCompTask(gameObject, compment);
         this._endFlow.addCompTask(gameObject, compment);
@@ -116,6 +124,8 @@ class GE {
     }
 }
 const Core = new GE();
+
+
 setTimeout(Core.start);
 
-export { Core };
+export { Core, GameObject };

@@ -4,14 +4,13 @@ import { Core } from './../Core/GE';
 class AbstractGameObject extends AbstractInstance {
     constructor() {
         super();
-        this._components = new Map();
+        this._components ={};
         this._typeComponents = new Map();
     };
-
     addComponent(component) {
         if (component instanceof AbstractComponent) {
             Core.addComponent(this, component);
-            this._components.set(component._id, component);
+            this._components[component._id] =  component;
             let list = this._typeComponents.get(component.constructor);
             if (!list) {
                 list = [];
@@ -24,10 +23,12 @@ class AbstractGameObject extends AbstractInstance {
     getComponentsByType(constructor){
         return this._typeComponents.get(constructor);
     };
-
+    getComponentById(id){
+        return this._components[id];
+    }
     removeComponent(component) {
         Core.destoryComponent(this, component);
-        this._components.delete(component._id);
+        delete this._components[component._id];
         const list = this._typeComponents.get(component.constructor);
         const index = list.indexOf(component);
         if (-1 !== index) {
@@ -35,7 +36,11 @@ class AbstractGameObject extends AbstractInstance {
         }
     }
     getComponents() {
-        return this._components.values();
+        // debugger
+        return Object.values(this._components);
+    }
+    destorySelf(){
+        Core.destoryGameObject(this);
     }
 
 }
