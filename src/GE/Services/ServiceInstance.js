@@ -18,9 +18,9 @@
 // });
 
 const Timer = {
-    frameCount,
-    timeFromStart,
-    deltaTime,
+    frameCount:0,
+    fromStart:0,
+    delta:0,
 };
 
 const Input = {

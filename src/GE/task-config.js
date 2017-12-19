@@ -1,8 +1,8 @@
-import {AbstractService } from './Services/AbstractService'
+import {TimeService } from './Services/TimeService'
  const config = {
     onStart: ['$awake','$start'],
-    onUpdate: ['$beforeUpdate','$update','$lateUpdate'],
+    onUpdate: ['$serviceUpdate','$beforeUpdate','$update','$lateUpdate'],
     onEnd: ['$destory'],
-    services:[AbstractService],
+    services:[TimeService],
 }
 export {config};

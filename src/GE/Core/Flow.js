@@ -42,17 +42,17 @@ class Flow {
 	};
 
 	_addToTaskLists(taskLists, task, prioroty) {
-		const curentList = taskLists[prioroty];
-		const index = curentList.push(task) - 1;
-		return { task, prioroty };
-	}
-	_addTask(task, prioroty) {
 		if ('function' !== typeof (task)) {
 			throw 'Type Error of task !';
 		}
 		if (isNaN(prioroty)) {
 			throw 'Type Error of prioroty !';
 		}
+		const curentList = taskLists[prioroty];
+		const index = curentList.push(task) - 1;
+		return { task, prioroty };
+	}
+	_addTask(task, prioroty) {
 		this.taskNumber++;
 		return this._addToTaskLists(this._taskLists, task, prioroty);
 	};
@@ -143,7 +143,5 @@ class Flow {
 		const taskLists = this._taskMap.get(gameObject).get(Constant.TASK_LISTS);
 		this._runTask(taskLists);
 	}
-
 }
-
 export { Flow };

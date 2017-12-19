@@ -11,9 +11,9 @@ class GE {
 
     _init() {
         console.log("_init ...");
+        this._initService();
         this._update = this._update.bind(this);
         this.start = this.start.bind(this);
-        this._initService();
     };
     _initService() {
         const services = taskConfig.services;
@@ -124,8 +124,6 @@ class GE {
     }
 }
 const Core = new GE();
-
-
 setTimeout(Core.start);
 
 export { Core, GameObject };
