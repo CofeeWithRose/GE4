@@ -1,7 +1,7 @@
 let globleId = 0;
 class Util {
-
     constructor() {
+       
     }
     static uuid() {
         return globleId++;
@@ -13,8 +13,19 @@ class Util {
         return obj.constructor.name;
     }
 }
+class Loger{
+    constructor (){
+        this.logger = new Worker('GE/Workers/Loger.js');
+    };
+    log(data){
+        this.logger.postMessage(data);
+    };
+};
+
+const Debugger = new Loger();
+
 const Constant = {
     TASK_LISTS: Symbol(),
-    ONE_PERCENT: 0.01,
+    ONE_PERCENT: 0.001,
 }
-export { Util, Constant };
+export { Util, Constant ,Debugger};

@@ -1,5 +1,6 @@
-import {TimeService } from './Services/TimeService'
+import { TimeService } from './Services/TimeService'
  const config = {
+    debug:true,
     onStart: ['$awake','$start'],
     onUpdate: ['$serviceUpdate','$beforeUpdate','$update','$lateUpdate'],
     onEnd: ['$destory'],

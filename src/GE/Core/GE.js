@@ -1,5 +1,5 @@
 import { Flow } from './Flow';
-import { config as taskConfig } from './../task-config';
+import { config as taskConfig } from './../GE-config';
 class GE {
     constructor() {
         this._startFlow = new Flow(taskConfig.onStart);
@@ -34,6 +34,8 @@ class GE {
             this._startFlow.clearTask();
         }
         this._updateFlow.runTask();
+        const t = Date.now();
+        // while(Date.now()- t < 1000){};
         const i = console.timeEnd("update");
     };
 

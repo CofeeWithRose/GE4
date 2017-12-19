@@ -36,7 +36,6 @@ class AbstractGameObject extends AbstractInstance {
         }
     }
     getComponents() {
-        // debugger
         return Object.values(this._components);
     }
     destorySelf(){

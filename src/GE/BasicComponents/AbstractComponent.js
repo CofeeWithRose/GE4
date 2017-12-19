@@ -1,6 +1,6 @@
 
 import { AbstractInstance } from './../Core/AbstractInstance';
-import { config } from './../task-config';
+import { config } from './../GE-config';
 class AbstractComponent extends AbstractInstance {
     constructor() {
         super();
