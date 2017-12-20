@@ -11,9 +11,11 @@ class AbstractComponent extends AbstractInstance {
     loadComp(gameObj){
         this.gameObject = gameObj;
     }
-    getComponentsByType(){
-        const comps = this.gameObject.getComponentsByType();
-        return comps?  comps[0]:null;
+    getComponentsByType(type){
+        return this.gameObject.getComponentsByType(type)||[];
+    }
+    getComponentByType(type){
+        return this.getComponentsByType(type)[0];
     }
     getComponentById(){
         return this.gameObject.getComponentById();

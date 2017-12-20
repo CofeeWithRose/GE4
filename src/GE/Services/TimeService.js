@@ -8,10 +8,11 @@ const Timer = {
 };
 class TimeService{
     constructor(){
-        
+    }
+    $awake(){
         Timer.frameCount = 0;
         this.start = Date.now()*Constant.ONE_PERCENT;
-    }
+    };
     $serviceUpdate(){
         const now = Date.now()*Constant.ONE_PERCENT;
         Timer.frameCount++;

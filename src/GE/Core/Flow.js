@@ -26,22 +26,22 @@ class Flow {
 		}
 	};
 	//按顺序执行taskt,出现异常打日志，不中断后续任务的执行.
-	runTask() {
-		this._runTask(this._taskLists);
+	runTask(callBack) {
+		this._runTask(this._taskLists, callBack);
 	};
-	_runLineTask(list = []) {
+	_runLineTask(list = [], callBack) {
 		for (var j = - 1; list[++j];) {
 			try {
-				list[j]();
+				list[j](callBack);
 			} catch (e) {
 				console.error(e);
 				console.error(list[j]);
 			}
 		}
 	}
-	_runTask(taskLists) {
+	_runTask(taskLists, callBack) {
 		for (let i = -1; taskLists[++i];) {
-			this._runLineTask(taskLists[i]);
+			this._runLineTask(taskLists[i], callBack);
 		}
 	};
 

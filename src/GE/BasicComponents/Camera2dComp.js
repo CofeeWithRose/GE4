@@ -9,5 +9,6 @@ class Camera2dComp extends AbstractComponent{
             camera.main =  this.gameObject;
         }
     };
+    
 }
 export {Camera2dComp};

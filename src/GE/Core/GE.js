@@ -1,8 +1,10 @@
 import { Flow } from './Flow';
-import { config as taskConfig  } from '../config-core';
+import { config as taskConfig } from '../config-core';
+import { Resource } from '../Services/Resource';
 class GE {
 
     constructor() {
+        this._serviceInitFlow = new Flow(taskConfig.onServiceInitAsy);
         this._startFlow = new Flow(taskConfig.onStart);
         this._updateFlow = new Flow(taskConfig.onUpdate);
         this._endFlow = new Flow(taskConfig.onEnd);
@@ -14,14 +16,18 @@ class GE {
         console.log("_init ...");
         this._update = this._update.bind(this);
         this.start = this.start.bind(this);
+        this.setUp = this.setUp.bind(this);
     };
     //根据配置实例化service.
     _loadService() {
         const services = taskConfig.services;
         const serviceObject = Symbol();
         for (let i = -1; services[++i];) {
-            this.addComponent(serviceObject, new services[i]);
+            const service = new services[i]();
+            this.addComponent(serviceObject, service);
+            this._serviceInitFlow.addCompTask(serviceObject, service);
         }
+        console.log(`tast number : ${this._serviceInitFlow.taskNumber}`)
     };
 
     _updateTemp() {
@@ -41,10 +47,33 @@ class GE {
         const i = console.timeEnd("update");
     };
 
-    start() {
+    _initServices() {
         this._loadService();
+        let excutedNumber = 0;
+        let totalNum = this._serviceInitFlow.taskNumber;
+        // debugger
+        if(0 === totalNum){
+            // console.log("no  init service task..")
+            this.start();
+        }else{
+            // console.log(" init service task..")
+            this._serviceInitFlow.runTask(() => {
+                excutedNumber++;
+                if (excutedNumber === totalNum) {
+                    this._serviceInitFlow = null;
+                    this.start();
+                }
+            })
+        }
+       
+    };
+    setUp() {
+        this._initServices();
+    }
+    start() {
+        console.log('core start...');
         this._startFlow.runTask();
-        // console.log('core started...');
+
         this._startFlow.clearTask();
         if (this._isStop) {
             this._isStop = !this._isStop;
@@ -83,5 +112,5 @@ class GE {
     }
 }
 const Core = new GE();
-setTimeout(Core.start);
+setTimeout(Core.setUp);
 export { Core, GameObject };
