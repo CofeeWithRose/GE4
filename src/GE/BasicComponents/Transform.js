@@ -1,6 +1,6 @@
 import {AbstractComponent} from './AbstractComponent';
-import {Camera} from './../Services/ServiceInstance';
 import { Vector3 } from '../Data/Vector3';
+import { Camera } from '../Services/Camera2DService';
 class Transform extends AbstractComponent{
     constructor(){
         super();

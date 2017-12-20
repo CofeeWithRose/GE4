@@ -1,6 +1,4 @@
 import { Constant } from "../Util/Constant";
-
-
 class Flow {
 
 	constructor(configList) {

@@ -1,5 +1,6 @@
 class Vector3 {
-    constructor({ x = 0, y = 0, z = 0 }) {
+    constructor(vector3) {
+        const { x = 0, y = 0, z = 0 } = vector3 || {};
         this.x = x;
         this.y = y;
         this.z = z;
@@ -24,4 +25,6 @@ class Vector3 {
         this.z = -this.z;
     }
 }
-export {Vector3};
+// const v=new Vector3({x:1,y:1,z:1});
+// console.log(`test vector3 ${v.x}`);
+export { Vector3 };

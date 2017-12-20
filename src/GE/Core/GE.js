@@ -2,7 +2,6 @@ import { Flow } from './Flow';
 import { config as taskConfig } from '../config-core';
 import { Resource } from '../Services/Resource';
 class GE {
-
     constructor() {
         this._serviceInitFlow = new Flow(taskConfig.onServiceInitAsy);
         this._startFlow = new Flow(taskConfig.onStart);
@@ -27,7 +26,7 @@ class GE {
             this.addComponent(serviceObject, service);
             this._serviceInitFlow.addCompTask(serviceObject, service);
         }
-        console.log(`tast number : ${this._serviceInitFlow.taskNumber}`)
+        // console.log(`tast number : ${this._serviceInitFlow.taskNumber}`)
     };
 
     _updateTemp() {
@@ -68,6 +67,7 @@ class GE {
        
     };
     setUp() {
+        console.log('set up......');
         this._initServices();
     }
     start() {

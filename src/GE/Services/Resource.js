@@ -11,11 +11,12 @@ class Resource {
      */
     //To Fix 目前只实现load config 中 Image.
     $initService(callBack) {
-        console.log('Load Resource ...');
+        
         const imageKeys = Object.keys(config.images);
         for (let i = 0; i < imageKeys.length; i++) {
             this._loadImage(config.images[imageKeys[i]], this._onCompleted(callBack));
         }
+        console.log(`Load Resource (${this._loadedCout}/${this._allCount})...`);
     }
     _onError(url, img, callBack) {
         return () => {
@@ -52,7 +53,10 @@ class Resource {
         return this._resources.get(url);
     }
     _onCompleted(callBack) {
-        return () => { callBack(); console.log('Resource complete!') }
+        return () => { 
+            console.log('Resource complete!')
+            callBack();
+          }
     }
 
 }

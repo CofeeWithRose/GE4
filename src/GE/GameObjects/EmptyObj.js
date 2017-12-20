@@ -1,9 +1,9 @@
 import {AbstractGameObject} from './AbstractGameObject';
 import { Transform } from '../BasicComponents/Transform';
-class Empty extends AbstractGameObject{
+class EmptyObj extends AbstractGameObject{
     constructor(){
         super();
         this.addComponent(new Transform());
     }
 }
-export {Empty};
+export {EmptyObj};
