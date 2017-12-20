@@ -1,6 +1,7 @@
 
 import { AbstractInstance } from './../Core/AbstractInstance';
-import { config } from './../Config/config-core';
+import { config } from '../config-core';
+
 class AbstractComponent extends AbstractInstance {
     constructor() {
         super();

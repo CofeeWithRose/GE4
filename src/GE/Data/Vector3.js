@@ -6,15 +6,17 @@ class Vector3 {
     }
     subtract(otherVector3) {
         return new Vector3({
-            x: this.x -= otherVector3.x, 
-            y: this.y -= otherVector3.y, 
-            z: this.z -= otherVector3.z });
+            x: this.x -= otherVector3.x,
+            y: this.y -= otherVector3.y,
+            z: this.z -= otherVector3.z
+        });
     }
     add(otherVector3) {
         return new Vector3({
-       x: this.x += otherVector3.x,
-        y:this.y += otherVector3.y,
-        z:this.z += otherVector3.z});
+            x: this.x += otherVector3.x,
+            y: this.y += otherVector3.y,
+            z: this.z += otherVector3.z
+        });
     }
     invert() {
         this.x = -this.x;
@@ -22,4 +24,4 @@ class Vector3 {
         this.z = -this.z;
     }
 }
-export { Vector3 };
+export {Vector3};

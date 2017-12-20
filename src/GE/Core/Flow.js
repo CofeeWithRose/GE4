@@ -1,4 +1,6 @@
-import { Constant } from './Util';
+import { Constant } from "../Util/Constant";
+
+
 class Flow {
 
 	constructor(configList) {
@@ -27,17 +29,19 @@ class Flow {
 	runTask() {
 		this._runTask(this._taskLists);
 	};
+	_runLineTask(list = []) {
+		for (var j = - 1; list[++j];) {
+			try {
+				list[j]();
+			} catch (e) {
+				console.error(e);
+				console.error(list[j]);
+			}
+		}
+	}
 	_runTask(taskLists) {
 		for (let i = -1; taskLists[++i];) {
-			const list = taskLists[i];
-			for (var j = - 1; list[++j];) {
-				try {
-					list[j]();
-				} catch (e) {
-					console.error(e);
-					console.error(list[j]);
-				}
-			}
+			this._runLineTask(taskLists[i]);
 		}
 	};
 
@@ -142,6 +146,10 @@ class Flow {
 	runObjectTask(gameObject) {
 		const taskLists = this._taskMap.get(gameObject).get(Constant.TASK_LISTS);
 		this._runTask(taskLists);
-	}
+	};
+	runObjPrioTask(gameObject, prioroty) {
+		const tasks = this._taskMap.get(gameObject).get(Constant.TASK_LISTS)[prioroty];
+		this._runLineTask(tasks);
+	};
 }
 export { Flow };

@@ -1,7 +1,7 @@
 import { Flow } from './Flow';
-import { config as taskConfig } from './../Config/config-core';
+import { config as taskConfig  } from '../config-core';
 class GE {
-    
+
     constructor() {
         this._startFlow = new Flow(taskConfig.onStart);
         this._updateFlow = new Flow(taskConfig.onUpdate);
@@ -12,12 +12,11 @@ class GE {
 
     _init() {
         console.log("_init ...");
-        this._initService();
         this._update = this._update.bind(this);
         this.start = this.start.bind(this);
     };
-
-    _initService() {
+    //根据配置实例化service.
+    _loadService() {
         const services = taskConfig.services;
         const serviceObject = Symbol();
         for (let i = -1; services[++i];) {
@@ -43,6 +42,7 @@ class GE {
     };
 
     start() {
+        this._loadService();
         this._startFlow.runTask();
         // console.log('core started...');
         this._startFlow.clearTask();
