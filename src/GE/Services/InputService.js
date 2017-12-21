@@ -12,7 +12,6 @@ class InputService {
 
     constructor() {
         const ele = document.querySelector(`#${renderConfig.camera2dRenderId}`);
-        console.log(ele);
         this._preventDefault();
         this._keyEventListen(ele);
         this._mouseEventListen(ele);

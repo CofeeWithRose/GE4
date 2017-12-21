@@ -31,19 +31,22 @@ class RenderComp extends AbstractComponent {
         this.ctx = this.spirit.canvas.getContext('2d');
         this.$preRend();
     }
-
+    $preRend() {
+        if (this._isChange) {
+            this._draw();
+            this._isChange = false;
+        }
+    };
+    $destory(){
+        this.spirit.destory();
+    }
     _listen() {
         //监听变动后重绘.
         // this.image = new Proxy(this.image, this.listenHandle);
         this.trans.rotation = new Proxy(this.trans.rotation, this.listenHandle);
         this.trans.scale = new Proxy(this.trans.scale, this.listenHandle);
     }
-    $preRend() {
-        if (this._isChange) {
-            this._draw();
-            this._isChange = false;
-        }
-    }
+   
     _draw() {
         // console.log(`draw... ${this.image}`)
         // debugger

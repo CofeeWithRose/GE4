@@ -9,6 +9,7 @@ const Timer = {
 };
 class TimeService {
     constructor() {
+
     }
     $awake() {
         Timer.frameCount = 0;
@@ -19,8 +20,9 @@ class TimeService {
     _createFPS() {
         if (renderConfig.showFPS) {
             this.fps = document.createElement('div');
+            this.fps.id = renderConfig.FPSContentId;
             this.fps.style = `position:absolute;
-        color:gray;
+        color:white;
         background-color:rgba(0,0,0,0.5);
         padding:0.3rem;
         border-radius:0.4rem;`;

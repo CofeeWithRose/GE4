@@ -120,7 +120,11 @@ class Flow {
 	// };
 	delCompTask(gameObject, component) {
 		const objTask = this._taskMap.get(gameObject);
-		const taskPositions = objTask.get(component);
+		if (!objTask) {
+			return;
+		}
+		// debugger
+		const taskPositions = objTask.get(component)||[];
 		for (let i = -1; taskPositions[++i];) {
 			this._deleteTask(taskPositions[i]);
 			this._delPosition(gameObject, component, taskPositions[i]);
@@ -130,6 +134,9 @@ class Flow {
 	};
 	delObjTask(gameObject) {
 		const comps = gameObject.getComponents();
+		if(!comps){
+			return;
+		}
 		for (let i = -1; comps[++i];) {
 			this.delCompTask(gameObject, comps[i]);
 		}

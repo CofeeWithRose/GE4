@@ -26,7 +26,6 @@ class GE {
             this.addComponent(serviceObject, service);
             this._serviceInitFlow.addCompTask(serviceObject, service);
         }
-        // console.log(`tast number : ${this._serviceInitFlow.taskNumber}`)
     };
 
     _updateTemp() {
@@ -34,7 +33,6 @@ class GE {
     };
 
     _update() {
-        // console.time("update")
         requestAnimationFrame(this._update);
         if (0 !== this._startFlow.taskNumber) {
             this._startFlow.runTask();
@@ -42,20 +40,16 @@ class GE {
         }
         this._updateFlow.runTask();
         const t = Date.now();
-        // while(Date.now()- t < 1000){};
-        // console.timeEnd("update");
     };
 
     _initServices() {
         this._loadService();
         let excutedNumber = 0;
         let totalNum = this._serviceInitFlow.taskNumber;
-        // debugger
-        if(0 === totalNum){
-            // console.log("no  init service task..")
+        if (0 === totalNum) {
             this.start();
-        }else{
-            // console.log(" init service task..")
+        } else {
+        
             this._serviceInitFlow.runTask(() => {
                 excutedNumber++;
                 if (excutedNumber === totalNum) {
@@ -64,7 +58,7 @@ class GE {
                 }
             })
         }
-       
+
     };
     setUp() {
         console.log('set up......');
@@ -113,4 +107,4 @@ class GE {
 }
 const Core = new GE();
 setTimeout(Core.setUp);
-export { Core, GameObject };
+export { Core };

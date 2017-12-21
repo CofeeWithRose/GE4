@@ -49,15 +49,8 @@ class Spirit {
         this.canvas.width = size.x;
         this.canvas.height = size.y;
         Camera.spirits.add(this, size.z);
+        this.destory = () => Camera.spirits.delete(this);
     }
-    // setSize(size){
-    //     if(size){
-    //         if(this.size.z !== size.z){
-    //             Camera.spirits.changePriorty(this,size.z);
-    //         }
-    //         if(this.size.x)
-    //         this.size = size;
-    //     }
-    // }
+  
 };
 export { Camera, Camera2DService, Spirit };
