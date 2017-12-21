@@ -57,7 +57,7 @@ class Resource {
     }
     _onCompleted(callBack) {
         return () => {
-            console.log('Resource complete!')
+            console.log('Resource Completed!')
             callBack();
         }
     }

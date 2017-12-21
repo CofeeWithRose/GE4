@@ -1,8 +1,8 @@
-import {CameraObj} from './GE/GameObjects/CameraObj'
+import { CameraObj } from './GE/GameObjects/CameraObj'
 import { RenderComp } from './GE/BasicComponents/RenderComp';
-(()=>{
-    
-    for(let i = 0; i<200;i++){
+(() => {
+
+    for (let i = 0; i < 1; i++) {
         new CameraObj().addComponent(new RenderComp());
     }
     // ab.addComponent(new Comp());

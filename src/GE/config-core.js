@@ -1,17 +1,18 @@
 import { TimeService } from './Services/TimeService'
 import { Camera2DService } from './Services/Camera2DService';
 import { Resource } from './Services/Resource';
+import { InputService } from './Services/InputService';
 const config = {
     /**
-     * 需要启动的service.
+     * 需要启动的service.将按顺序实例化.
      */
-    services: [TimeService, Camera2DService, Resource],
+    services: [TimeService, Camera2DService, Resource, InputService],
     /**
      * 启动前的异步准备函数,在定义该函数时，需执行传入的回调，全部回调完成才会启动，例见Resource.
      */
     onServiceInitAsy: ['$initService'],
     onStart: ['$awake', '$start'],
-    onUpdate: ['$serviceUpdate', '$update', '$lateUpdate', '$preRend', '$rend'],
+    onUpdate: ['$serviceUpdate', '$update', '$lateUpdate', '$preRend', '$rend','$rended'],
     onCallBack: ['$onHit', '$onHitted'],
     onEnd: ['$destory'],
 }

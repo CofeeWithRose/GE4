@@ -34,7 +34,7 @@ class GE {
     };
 
     _update() {
-        console.time("update")
+        // console.time("update")
         requestAnimationFrame(this._update);
         if (0 !== this._startFlow.taskNumber) {
             this._startFlow.runTask();
@@ -43,7 +43,7 @@ class GE {
         this._updateFlow.runTask();
         const t = Date.now();
         // while(Date.now()- t < 1000){};
-        const i = console.timeEnd("update");
+        // console.timeEnd("update");
     };
 
     _initServices() {

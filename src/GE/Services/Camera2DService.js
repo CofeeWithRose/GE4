@@ -18,30 +18,17 @@ class Camera2DService {
         this.height = canvas.height = this.offCanvas.height = elem.clientHeight;
         this.ctx = canvas.getContext('2d');
         this.offCtx = this.offCanvas.getContext('2d');
+        elem.id = renderConfig.camera2dRenderId;
         elem.appendChild(canvas);
     }
     $rend() {
-        // Debugger.log(`rend  ${Camera.spirits.size} ...`);
         this._rendOffLine();
-        this.ctx.clearRect(0,0,this.width,this.height);
-        this.ctx.drawImage(this.offCanvas,0,0,this.width,this.height);
-        // this._rend();
-    }
-    _rend() {
-        this.ctx.clearRect(0,0,this.width,this.height);
-        
-        Camera.spirits.forEach((spirit) => {
-            // Debugger.log(`rend spirit...`);
-            this.ctx.drawImage(spirit.canvas,
-                spirit.screenPosition.x,
-                spirit.screenPosition.y,
-                spirit.size.x,
-                spirit.size.y);
-        });
+        this.ctx.clearRect(0, 0, this.width, this.height);
+        this.ctx.drawImage(this.offCanvas, 0, 0, this.width, this.height);
     }
     //离线canvas缓存减少回流次数，chrome下在3次绘图时有显著提升.
     _rendOffLine() {
-        this.offCtx.clearRect(0,0,this.width,this.height);
+        this.offCtx.clearRect(0, 0, this.width, this.height);
         Camera.spirits.forEach((spirit) => {
             // Debugger.log(`rend spirit...`);
             this.offCtx.drawImage(spirit.canvas,
@@ -51,8 +38,7 @@ class Camera2DService {
                 spirit.size.y);
         });
     }
-   
-}
+};
 
 class Spirit {
     constructor(screenPosition = new Vector3(), size = new Vector3()) {
@@ -73,5 +59,5 @@ class Spirit {
     //         this.size = size;
     //     }
     // }
-}
+};
 export { Camera, Camera2DService, Spirit };
