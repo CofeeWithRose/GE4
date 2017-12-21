@@ -6,11 +6,16 @@ class Transform extends AbstractComponent{
         super();
         this.position = new Vector3();
         this.rotation = new Vector3();
-        this.scale = new Vector3();
+        this.scale = new Vector3({x:1,y:1});
+        this.sPosition = new Vector3();
+        
     }
-    getScreenPosition(){
-       const mainTrans = Camera.main.getComponentByType(Transform)[0];
-       return mainTrans.position.subtract(this.position);
-    };
+    $start(){
+        // console.log(Camera.main.getComponentByType);
+        this.caP = Camera.main.getComponentByType(Transform).position;
+    }
+    $update(){
+        this.caP.subtract(this.position,this.sPosition);
+    }
 }
 export {Transform};

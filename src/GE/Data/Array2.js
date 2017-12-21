@@ -8,6 +8,7 @@ class Arrays2 {
          * { obj: priorty}
          */
         this._map = new Map();
+        this.size = 0;
     }
 
     _getCurrentArray(priorty) {
@@ -19,18 +20,20 @@ class Arrays2 {
      * @param {Number} priorty 
      */
     add(obj, priorty) {
+        this.size++;
         this._getCurrentArray(priorty).push(obj);
-        this._map.set(obj,priorty);
+        this._map.set(obj, priorty);
     };
-    delete(obj){
+    delete(obj) {
+        this.size--;
         const priorty = this._map.get(obj);
         this._map.delete(obj);
         const current = this._getCurrentArray(priorty);
-        current.splice(current.indexOf(obj),1);
+        current.splice(current.indexOf(obj), 1);
     }
-    changePriorty(obj, newPriorty){
+    changePriorty(obj, newPriorty) {
         this.delete(obj);
-        this.add(obj,newPriorty);
+        this.add(obj, newPriorty);
     }
     forEach(fun) {
         for (let i = 0; i < this._array.length; i++) {
@@ -41,4 +44,4 @@ class Arrays2 {
         }
     }
 }
-export {Arrays2};
+export { Arrays2 };

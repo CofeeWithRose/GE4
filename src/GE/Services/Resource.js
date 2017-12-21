@@ -1,17 +1,20 @@
 import { config } from "../config-resources";
-
+const resource = {
+    loader: undefined,
+};
 class Resource {
     constructor() {
         this._resources = new Map();
         this._loadedCout = 0;
         this._allCount = 0;
+        resource.loader = this;
     }
     /**
      * {url:resource}
      */
     //To Fix 目前只实现load config 中 Image.
     $initService(callBack) {
-        
+
         const imageKeys = Object.keys(config.images);
         for (let i = 0; i < imageKeys.length; i++) {
             this._loadImage(config.images[imageKeys[i]], this._onCompleted(callBack));
@@ -53,11 +56,12 @@ class Resource {
         return this._resources.get(url);
     }
     _onCompleted(callBack) {
-        return () => { 
+        return () => {
             console.log('Resource complete!')
             callBack();
-          }
+        }
     }
 
 }
-export { Resource }
+
+export { Resource ,resource }

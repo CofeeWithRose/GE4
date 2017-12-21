@@ -21,8 +21,11 @@ class AbstractGameObject extends AbstractInstance {
             return component;
         }
     };
+    getComponentByType(constructor){
+        return this.getComponentsByType(constructor)[0];
+    }
     getComponentsByType(constructor){
-        return this._typeComponents.get(constructor);
+        return this._typeComponents.get(constructor)||[];
     };
     getComponentById(id){
         return this._components[id];

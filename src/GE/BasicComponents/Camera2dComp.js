@@ -1,12 +1,14 @@
 import { AbstractComponent } from "./AbstractComponent";
-import {Camera as camera} from './../Services/ServiceInstance'
+import { Camera } from "../Services/Camera2DService";
+
 class Camera2dComp extends AbstractComponent{
     constructor(){
         super();
     }
     $awake(){
-        if(!camera.main){
-            camera.main =  this.gameObject;
+        if(!Camera.main){
+            
+            Camera.main =  this.gameObject;
         }
     };
     

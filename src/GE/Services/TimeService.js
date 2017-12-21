@@ -20,7 +20,7 @@ class TimeService{
         Timer.delta = fromStart - Timer.fromStart;
         Timer.fromStart =  fromStart ;
         // console.log(`timerUpdate update.... : ${Timer.delta} ， ${Timer.frameCount} , ${Timer.fromStart}`);
-        Debugger.log(`timerUpdate update.... : ${Timer.delta} ， ${Timer.frameCount} , ${Timer.fromStart}`);
+        // Debugger.log(`timerUpdate update.... : ${Timer.delta} ， ${Timer.frameCount} , ${Timer.fromStart}`);
     }
 }
 export{TimeService,Timer};
