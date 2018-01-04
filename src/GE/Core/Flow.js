@@ -2,8 +2,9 @@ import { Constant } from "../Util/Constant";
 class Flow {
 
 	constructor(configList) {
-		//二维数组x:prioroty,y:tasklist.
+		
 		this._configList = configList;
+		//二维数组x:prioroty,y:tasklist.
 		this._taskLists = [];
 		this.taskNumber = 0;
 		/**
