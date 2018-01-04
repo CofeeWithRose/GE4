@@ -10,7 +10,7 @@ class GE {
         this._isStop = false;
         this._init();
     }
-
+    //构造器中调用
     _init() {
         console.log("_init ...");
         this._update = this._update.bind(this);
@@ -32,16 +32,7 @@ class GE {
 
     };
 
-    _update() {
-        requestAnimationFrame(this._update);
-        if (0 !== this._startFlow.taskNumber) {
-            this._startFlow.runTask();
-            this._startFlow.clearTask();
-        }
-        this._updateFlow.runTask();
-        const t = Date.now();
-    };
-
+    //初始化异步流程，接收到所有的回调后，执行start流程.
     _initServices() {
         this._loadService();
         let excutedNumber = 0;
@@ -49,7 +40,7 @@ class GE {
         if (0 === totalNum) {
             this.start();
         } else {
-        
+
             this._serviceInitFlow.runTask(() => {
                 excutedNumber++;
                 if (excutedNumber === totalNum) {
@@ -60,10 +51,12 @@ class GE {
         }
 
     };
+    //入口.
     setUp() {
         console.log('set up......');
         this._initServices();
     }
+    //执行start流程,完成后启动帧循环流程.
     start() {
         console.log('core start...');
         this._startFlow.runTask();
@@ -76,6 +69,16 @@ class GE {
         this._update();
 
     }
+    //帧循环.
+    _update() {
+        requestAnimationFrame(this._update);
+        if (0 !== this._startFlow.taskNumber) {
+            this._startFlow.runTask();
+            this._startFlow.clearTask();
+        }
+        this._updateFlow.runTask();
+        const t = Date.now();
+    };
     pause() {
         this._isStop = true;
         this._updateTemp = this._update;
@@ -84,6 +87,7 @@ class GE {
     stop() {
         this._endFlow.runTask();
     }
+    //按照配置向流程中添加任务.
     addComponent(gameObject, compment) {
         // debugger
         this._startFlow.addCompTask(gameObject, compment);
