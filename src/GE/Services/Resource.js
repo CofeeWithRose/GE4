@@ -2,6 +2,7 @@ import { config } from "../config-resources";
 const resource = {
     loader: undefined,
 };
+//载入图片资源.
 class Resource {
     constructor() {
         this._resources = new Map();
@@ -36,6 +37,7 @@ class Resource {
             this._resources.set(url, img);
             img.onload = null;
             this._loadedCout++;
+            console.log(`loaded  [${url}] (${this._loadedCout}/${this._allCount}) .... `);
             if (this._loadedCout === this._allCount) {
                 console.log(`loaded  [${url}] (${this._loadedCout}/${this._allCount}) .... `);
                 callBack();

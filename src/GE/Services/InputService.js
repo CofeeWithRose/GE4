@@ -8,6 +8,10 @@ const Input = {
     up: {},
     down: {},
 };
+//它不会被我们手动创建，在main文件中是不能直接接触到InputService。
+// 需要的service应该写入config-core中
+//因为service不能被main访问.只能通过一个对象来通信，
+//这里InputService会在运行时改变Input对象的属性，全局唯一。
 class InputService {
 
     constructor() {
@@ -22,6 +26,7 @@ class InputService {
             e.preventDefault();
         };
     }
+    //这人里面将鼠键事件的状态写入Input中
     _mouseEventListen(ele) {
         ele.addEventListener('mousedown', (e) => {
             //mouse0:左键，mouse1滚轮，mouse2:右键.
@@ -66,3 +71,4 @@ class InputService {
     }
 }
 export { InputService, Input }
+//import与export一一对应.

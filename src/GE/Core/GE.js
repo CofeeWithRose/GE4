@@ -1,11 +1,19 @@
 import { Flow } from './Flow';
 import { config as taskConfig } from '../config-core';
 import { Resource } from '../Services/Resource';
+
+// const config = {
+//     /**
+//      * 需要启动的service.将按顺序实例化.
+//      */
+//     services: [TimeService, Camera2DService, Resource, InputService],
+//是它
 class GE {
+    //加载配置.
     constructor() {
         this._serviceInitFlow = new Flow(taskConfig.onServiceInitAsy);
         this._startFlow = new Flow(taskConfig.onStart);
-        this._updateFlow = new Flow(taskConfig.onUpdate);
+        this._updateFlow = new Flow(taskConfig.onUpdate);//根据配置载入帧循环的方法.
         this._endFlow = new Flow(taskConfig.onEnd);
         this._isStop = false;
         this._init();
@@ -19,10 +27,10 @@ class GE {
     };
     //根据配置实例化service.
     _loadService() {
-        const services = taskConfig.services;
+        const services = taskConfig.services;//[TimeService, Camera2DService, Resource, InputService]
         const serviceObject = Symbol();
         for (let i = -1; services[++i];) {
-            const service = new services[i]();
+            const service = new services[i]();//这里会将配置的service实例化
             this.addComponent(serviceObject, service);
             this._serviceInitFlow.addCompTask(serviceObject, service);
         }
@@ -32,15 +40,15 @@ class GE {
 
     };
 
-    //初始化异步流程，接收到所有的回调后，执行start流程.
+ 
     _initServices() {
-        this._loadService();
+        this._loadService();//创建service单例.
         let excutedNumber = 0;
         let totalNum = this._serviceInitFlow.taskNumber;
         if (0 === totalNum) {
             this.start();
         } else {
-
+            //初始化异步流程，资源加载完毕后 ，执行start流程
             this._serviceInitFlow.runTask(() => {
                 excutedNumber++;
                 if (excutedNumber === totalNum) {
@@ -54,7 +62,7 @@ class GE {
     //入口.
     setUp() {
         console.log('set up......');
-        this._initServices();
+        this._initServices();//
     }
     //执行start流程,完成后启动帧循环流程.
     start() {
@@ -71,12 +79,12 @@ class GE {
     }
     //帧循环.
     _update() {
-        requestAnimationFrame(this._update);
+        requestAnimationFrame(this._update);//递归调用
         if (0 !== this._startFlow.taskNumber) {
             this._startFlow.runTask();
             this._startFlow.clearTask();
         }
-        this._updateFlow.runTask();
+        this._updateFlow.runTask();//帧循环
         const t = Date.now();
     };
     pause() {
@@ -90,7 +98,7 @@ class GE {
     //按照配置向流程中添加任务.
     addComponent(gameObject, compment) {
         // debugger
-        this._startFlow.addCompTask(gameObject, compment);
+        this._startFlow.addCompTask(gameObject, compment);//根据配置将组件的函数加载入任务流中.
         this._updateFlow.addCompTask(gameObject, compment);
         this._endFlow.addCompTask(gameObject, compment);
     };

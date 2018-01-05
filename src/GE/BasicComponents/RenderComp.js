@@ -22,6 +22,7 @@ class RenderComp extends AbstractComponent {
             }
         }
     }
+    //组件初始化时会被调用.
     $start() {
         this.image = resource.loader.get(config.images.default);
         this.trans = this.getComponentByType(Transform);
@@ -31,12 +32,15 @@ class RenderComp extends AbstractComponent {
         this.ctx = this.spirit.canvas.getContext('2d');
         this.$preRend();
     }
+    //在对象被渲染前被调用,该方法会每一帧到会被调用。其实还有许多在组件的方法都会被调用以后再详解.
     $preRend() {
+        // console.log(" $preRend............");
         if (this._isChange) {
             this._draw();
             this._isChange = false;
         }
     };
+    //在对象被销毁时被调用.
     $destory(){
         this.spirit.destory();
     }

@@ -1,4 +1,9 @@
 import { Constant } from "../Util/Constant";
+/**
+ * 将根据配置，根据不同粒度，执行、删除配置的函数.
+ * 
+ * 
+ */
 class Flow {
 
 	constructor(configList) {
@@ -31,7 +36,7 @@ class Flow {
 	_runLineTask(list = [], callBack) {
 		for (var j = - 1; list[++j];) {
 			try {
-				list[j](callBack);
+				list[j](callBack);//comp中的配置的将在这里被调用.
 			} catch (e) {
 				console.error(e);
 				console.error(list[j]);
@@ -119,6 +124,7 @@ class Flow {
 	// addObjTask(gameObject){
 
 	// };
+	//删除指定object 指定的 component的函数.
 	delCompTask(gameObject, component) {
 		const objTask = this._taskMap.get(gameObject);
 		if (!objTask) {
