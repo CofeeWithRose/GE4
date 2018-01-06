@@ -2,6 +2,9 @@
 import { Constant } from '../Util/Constant';
 import { Debugger } from '../Util/Debugger';
 import { renderConfig } from '../config-render';
+/**
+ * 单位为s.
+ */
 const Timer = {
     frameCount: 0,
     fromStart: 0,
@@ -15,7 +18,6 @@ class TimeService {
         Timer.frameCount = 0;
         this.start = Date.now() * Constant.ONE_PERCENT;
         this._createFPS();
-
     };
     _createFPS() {
         if (renderConfig.showFPS) {

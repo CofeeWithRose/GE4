@@ -4,12 +4,35 @@ import { Vector3 } from "../Data/Vector3";
 import { Debugger } from "../Util/Debugger";
 import { resource } from "./Resource";
 import { config } from "../config-resources";
-const Camera = {
-    main: undefined,
-    spirits: new Arrays2(),
-};
-class Camera2DService {
+import { AbstractInstance } from "../Core/AbstractInstance";
+//camera service需要的可访问对象.
+class CameraInstance extends AbstractInstance {
     constructor() {
+        super();
+        this.main = null;
+        this.spirits = new Arrays2();
+    }
+    /**
+     * 改变渲染顺序.
+     * @param {Spirit} spirit 
+     * @param {Number} layer 
+     */
+    changeLayer(spirit, layer) {
+        this.spirits.changePriorty(spirit, layer);
+    }
+    addSpirit(spirit = new Spirit(), layer = 0) {
+        this.spirits.add(spirit, layer);
+    }
+    delSpirit(spirit){
+        this.spirits.delete(spirit);
+    }
+}
+//camera service需要的可访问对象.
+const Camera = new CameraInstance();
+
+class Camera2DService extends AbstractInstance {
+    constructor() {
+        super();
         const elem = document.querySelector(`#${renderConfig.camera2dContentId}`);
         const canvas = document.createElement('canvas');
         this.offCanvas = document.createElement('canvas');
@@ -39,18 +62,30 @@ class Camera2DService {
         });
     }
 };
-
+/**
+ * 用于渲染2D图片的对象.
+ */
 class Spirit {
-    constructor(screenPosition = new Vector3(), size = new Vector3()) {
+    /**
+     * 
+     * @param {Vector3} screenPosition 
+     * @param {Vector3} size 
+     * @param {Number} layer 
+     */
+    constructor(screenPosition = new Vector3(), size = new Vector3(), layer = 0) {
+        this.canvas = document.createElement('canvas');
         this.screenPosition = screenPosition;
         this.size = size;
-        this.canvas = document.createElement('canvas');
-        this.layer = size.z;
+        this.layer = layer;
         this.canvas.width = size.x;
         this.canvas.height = size.y;
-        Camera.spirits.add(this, size.z);
-        this.destory = () => Camera.spirits.delete(this);
-    }
-  
+    };
+    /**
+     * 改变层级.
+     * @param {Number} layer
+     */
+    changeLayer(layer) {
+        Camera.changeLayer(this, layer);
+    };
 };
 export { Camera, Camera2DService, Spirit };

@@ -20,17 +20,21 @@ class Arrays2 {
      * @param {Number} priorty 
      */
     add(obj, priorty) {
-        this.size++;
+       
         this._getCurrentArray(priorty).push(obj);
         this._map.set(obj, priorty);
+        this.size++;
     };
+    //删除对象
     delete(obj) {
-        this.size--;
+       
         const priorty = this._map.get(obj);
         this._map.delete(obj);
         const current = this._getCurrentArray(priorty);
         current.splice(current.indexOf(obj), 1);
+        this.size--;
     }
+    //修改顺序.
     changePriorty(obj, newPriorty) {
         this.delete(obj);
         this.add(obj, newPriorty);
