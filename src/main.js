@@ -1,6 +1,7 @@
 import { CameraObj } from './GE/GameObjects/CameraObj'
 import { RenderComp } from './GE/BasicComponents/RenderComp';
 import { TestComp } from './GE/BasicComponents/TestComp';
+import { config } from './GE/config-resources';
 (() => {
 
     for (let i = 0; i < 1; i++) {
@@ -12,8 +13,7 @@ import { TestComp } from './GE/BasicComponents/TestComp';
          * 
          * RenderComp: 该功能为对象渲染出图像.
          * */
-        
-        gameObject.addComponent(new RenderComp());
+        gameObject.addComponent(new RenderComp(0,config.images.t2));
         gameObject.addComponent(new TestComp());
     }
     // ab.addComponent(new Comp());
@@ -28,4 +28,4 @@ import { TestComp } from './GE/BasicComponents/TestComp';
 
 // Component与gameObject绑定，但并不能满足所有的需要。
 
-// service在游戏中是单例.
+// service在游戏中是单例.看这里

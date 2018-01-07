@@ -3,24 +3,17 @@ const config = {
         default: "Resources/default.png",
         default3: "Resources/default3.png",
         errorTest2: "hjhhk.png",
-        t1:"Resources/5 (1).jpg",
-        t2:"Resources/5 (2).jpg",
-        t3:"Resources/5 (3).jpg",
-        t4:"Resources/5 (4).jpg",
-        t5:"Resources/5 (5).jpg",
-        t6:"Resources/5 (6).jpg",
-        t7:"Resources/5 (7).jpg",
-        t8:"Resources/5 (8).jpg",
-        t9:"Resources/5 (9).jpg",
-        t10:"Resources/5 (10).jpg",
-
+    },
+    /**
+     * animation文件夹格中图片的命名方式为：[ player_run (1).jpg/png...]
+     * url文件夹路径
+     */
+    animations: {
+        player_run_anim: { url: 'Resources', type: 'jpg', frameNumber: 12 },
+        player_jump_anim: { url: 'Resources', type: 'jpg', frameNumber: 0 },
     },
     audios: {
 
     },
-    animations: {
-        playerRun: { url: '', type: '', frameNumber: 2 },
-        playerJump:{ url: '', type: '', frameNumber: 2 },
-    }
 }
 export { config };
